@@ -28,12 +28,12 @@ namespace Data
             modelBuilder.Entity<Students>()
                 .HasOne(it => it.IdGroup);
         }
-        DbSet<Attendance> Attendances { get; set; }
-        DbSet<Groups> Groupses { get; set; }
-        DbSet<Students> Studentses { get; set; }
-        DbSet<GroupsAndSubject> GroupsAndSubjects { get; set;}
-        DbSet<Statuses> Statuss { get; set; }
-        DbSet<Subjects> Subjectses { get; set; }
+        public DbSet<Attendance> Attendances { get; set; }
+        public DbSet<Groups> Groupses { get; set; }
+        public DbSet<Students> Studentses { get; set; }
+        public DbSet<GroupsAndSubject> GroupsAndSubjects { get; set;}
+        public DbSet<Statuses> Statuss { get; set; }
+        public DbSet<Subjects> Subjectses { get; set; }
     }
 }
 
