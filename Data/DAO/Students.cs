@@ -12,6 +12,6 @@ namespace Data.DAO
         [Key]
         public int Id { get; set; }
         public string Fio { get; set; }
-        public string IdGroup { get; set; }
+        public virtual Groups IdGroup { get; set; }
     }
 }
