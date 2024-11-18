@@ -44,5 +44,28 @@ namespace Data.Repository
         {
           return _dbContext.Groupses.ToList();
         }
+
+        public bool addGroupWithStudents(Groups groups, IEnumerable<Students> students)
+        {
+            using var transaction = _dbContext.Database.BeginTransaction();
+            try
+            {
+                _dbContext.Groupses.Add(groups);
+                _dbContext.SaveChanges();
+                foreach(var item in students)
+                {
+                    item.IdGroup = groups;
+                    _dbContext.Studentses.Add(item);
+                }
+                _dbContext.SaveChanges();
+                transaction.Commit();
+                return true;
+            }
+            catch (Exception ex) 
+            {
+                transaction.Rollback();
+            }
+            return false;
+        }
     }
 }

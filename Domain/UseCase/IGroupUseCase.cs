@@ -11,5 +11,6 @@ namespace Domain.UseCase
     public interface IGroupUseCase
     {
        public void AddGroupes(AddGroupRequest addGroupRequest);
+        public void AddGroupWithStudents(AddGroupWithStudentRequest addGroupWithStudent);
     }
 }

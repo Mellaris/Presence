@@ -21,5 +21,20 @@ namespace Console_Ui
             Console.WriteLine("Введите имя группы");
             _groupService.AddGroupes(new AddGroupRequest { Name = Console.ReadLine() });
         }
+        public void AddGroupWithStudent()
+        {
+            Console.WriteLine("Введите имя группы");
+            AddGroupRequest addGroupRequest = new AddGroupRequest { Name = Console.ReadLine() };
+            List<AddStudentRequest> addStudentRequests = new List<AddStudentRequest>() { 
+                new AddStudentRequest{StudentName = "123"},
+                new AddStudentRequest{StudentName = "312"},
+                new AddStudentRequest{StudentName = "222"},
+                new AddStudentRequest{StudentName = "444"},
+            };
+            AddGroupWithStudentRequest addGroupWithStudentRequest = new AddGroupWithStudentRequest { addGroupRequest = addGroupRequest,
+                AddStudentRequest = addStudentRequests
+            };
+            _groupService.AddGroupWithStudents(addGroupWithStudentRequest);
+        }
     }
 }

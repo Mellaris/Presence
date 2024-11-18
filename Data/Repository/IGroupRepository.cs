@@ -11,5 +11,7 @@ namespace Data.Repository
     {
         public IEnumerable<Groups> GetAllGroup();
         public bool AddGroup(Groups groups);
+
+        public bool addGroupWithStudents(Groups groups, IEnumerable<Students> students);
     }
 }
