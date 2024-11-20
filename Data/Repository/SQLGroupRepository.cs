@@ -1,4 +1,5 @@
 ﻿using Data.DAO;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,20 @@ namespace Data.Repository
                 return false;
             }
         }
+        public bool UpdateGroup(int Id, Groups groups)
+        {
+            try
+            {
+                Groups groups1 = _dbContext.Groupses.FirstOrDefault(g => g.Id == Id);
+                groups1.Name = groups.Name;
+                _dbContext.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
         public IEnumerable<Groups> GetAllGroup()
         {
@@ -67,5 +82,7 @@ namespace Data.Repository
             }
             return false;
         }
+
+        
     }
 }

@@ -20,7 +20,10 @@ namespace Domain.Service
         {
             _groupRepository.AddGroup(new Groups { Name = addGroupRequest.Name });
         }
-
+        public void RemoveGroupes(RemoveGroupRequest removeGroupRequest)
+        {
+            _groupRepository.RemoveGroup(new Groups { Id = removeGroupRequest.Id });
+        }
         public void AddGroupWithStudents(AddGroupWithStudentRequest addGroupWithStudent)
         {
             Groups groups = new Groups { Name = addGroupWithStudent.addGroupRequest.Name };
@@ -29,6 +32,11 @@ namespace Domain.Service
                 .Select(it => new Students { Fio = it.StudentName })
                 .ToList();
             _groupRepository.addGroupWithStudents(groups, students);
+        }
+
+        public void UpdateGroupes(int Id, UpdateGroupRequest updateGroupRequest)
+        {
+            _groupRepository.UpdateGroup(Id, new Groups() { Name = updateGroupRequest.Name });
         }
     }
 }

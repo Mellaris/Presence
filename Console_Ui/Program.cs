@@ -2,6 +2,8 @@
 using Data;
 using Data.Repository;
 using Domain.Service;
+using Domain.UseCase;
+using Microsoft.Extensions.DependencyInjection;
 
 
 void printAllGroups(IGroupRepository groupRepository)
@@ -13,13 +15,16 @@ void printAllGroups(IGroupRepository groupRepository)
 }
 
 
-RemoteDatabaseContext remoteDatabaseContext = new RemoteDatabaseContext();
-SQLGroupRepository groupRepository = new SQLGroupRepository(remoteDatabaseContext);
-GroupService groupService = new GroupService(groupRepository);
-GroupUi group = new GroupUi(groupService);
+IServiceCollection serviceCollection = new ServiceCollection();
+serviceCollection
+    .AddDbContext<RemoteDatabaseContext>()
+    .AddSingleton<IGroupRepository, SQLGroupRepository>()
+    .AddSingleton<IGroupUseCase, GroupService>()
+    .AddSingleton<GroupUi>();
 
-group.AddGroupWithStudent();
+var servicProvider = serviceCollection.BuildServiceProvider();
+var groupUi = servicProvider.GetService<GroupUi>();
 
-printAllGroups(groupRepository);
+groupUi?.UpdateGroup();
 
 
