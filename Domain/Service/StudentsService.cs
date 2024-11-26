@@ -17,9 +17,9 @@ namespace Domain.Service
         {
             _studentsRepository = studentsRepository;
         }
-        public void AddStudents(AddStudentsRequest addStudentsRequest, Groups Id)
+        public void AddStudents(AddStudentsRequest addStudentsRequest)
         {
-            _studentsRepository.AddStudents(new Students { Fio = addStudentsRequest.Name, IdGroup = Id});
+            //_studentsRepository.AddStudents(new Students { Fio = addStudentsRequest.Name, IdGroup = Id});
         }
     }
 }

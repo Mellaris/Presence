@@ -57,7 +57,7 @@ namespace Data.Repository
 
         public IEnumerable<Groups> GetAllGroup()
         {
-          return _dbContext.Groupses.ToList();
+          return _dbContext.Groupses.Include(group => group.Students).ToList();
         }
 
         public bool addGroupWithStudents(Groups groups, IEnumerable<Students> students)

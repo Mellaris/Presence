@@ -10,6 +10,6 @@ namespace Domain.UseCase
 {
     public interface IStudentsUseCase
     {
-        public void AddStudents(AddStudentsRequest addStudentsRequest, Groups IdGroup);
+        public void AddStudents(AddStudentsRequest addStudentsRequest);
     }
 }

@@ -21,10 +21,12 @@ namespace Console_Ui
         }
         public void AddStudent()
         {
-            //Console.WriteLine("Введите фио студента");
-            //string studentName = Console.ReadLine();
-            //Console.WriteLine("Введите id группы");
-            //Groups IdG = Console.ReadLine();
+            Students students = new Students();
+            Console.WriteLine("Введите фио студента");
+            students.Fio = Console.ReadLine();
+            Console.WriteLine("Введите id группы");
+            students.IdGroup = new Groups { Id = Int32.Parse(Console.ReadLine()) };
+            _studentsUseCase.AddStudents(new AddStudentsRequest { IdGroup = students.IdGroup, Name = students.Fio });
 
             //_studentsUseCase.AddStudents(IdG, new AddStudentsRequest { IdGroup = IdG, Name = studentName });
         }

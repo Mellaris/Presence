@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Domain.Entity
 {
-    public class GroupEntity
+    public class StudentEntity
     {
-        public int Id { get; set; }
+        public int Guid { get; set; }
         public string Name { get; set; }
-        public IEnumerable<StudentEntity>? Students { get; set; } = null;
+        public GroupEntity Group { get; set; }
     }
 }

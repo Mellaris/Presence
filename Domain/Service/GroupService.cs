@@ -1,5 +1,6 @@
 ﻿using Data.DAO;
 using Data.Repository;
+using Domain.Entity;
 using Domain.Request;
 using Domain.UseCase;
 using System;
@@ -13,7 +14,8 @@ namespace Domain.Service
     public class GroupService : IGroupUseCase
     {
         private readonly IGroupRepository _groupRepository;
-        public GroupService(IGroupRepository groupRepository){
+        public GroupService(IGroupRepository groupRepository)
+        {
             _groupRepository = groupRepository;
         }
         public void AddGroupes(AddGroupRequest addGroupRequest)
@@ -37,6 +39,27 @@ namespace Domain.Service
         public void UpdateGroupes(int Id, UpdateGroupRequest updateGroupRequest)
         {
             _groupRepository.UpdateGroup(Id, new Groups() { Name = updateGroupRequest.Name });
+        }
+
+        public IEnumerable<GroupEntity> GetGroupsWithStudents()
+        {
+            return _groupRepository.GetAllGroup().Select(
+                Groups => new GroupEntity
+                {
+                    Id = Groups.Id,
+                    Name = Groups.Name,
+                    Students = Groups.Students.Select(
+                        user => new StudentEntity
+                        {
+                            Guid = user.Id,
+                            Name = user.Fio,
+                            Group = new GroupEntity
+                            {
+                                Id = Groups.Id,
+                                Name = Groups.Name,
+                            }
+                        }).ToList()
+                }).ToList();
         }
     }
 }
