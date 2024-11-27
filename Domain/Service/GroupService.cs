@@ -44,19 +44,19 @@ namespace Domain.Service
         public IEnumerable<GroupEntity> GetGroupsWithStudents()
         {
             return _groupRepository.GetAllGroup().Select(
-                Groups => new GroupEntity
+                group => new GroupEntity
                 {
-                    Id = Groups.Id,
-                    Name = Groups.Name,
-                    Students = Groups.Students.Select(
+                    Id = group.Id,
+                    Name = group.Name,
+                    Students = group.Students.Select(
                         user => new StudentEntity
                         {
                             Guid = user.Id,
                             Name = user.Fio,
                             Group = new GroupEntity
                             {
-                                Id = Groups.Id,
-                                Name = Groups.Name,
+                                Id = group.Id,
+                                Name = group.Name,
                             }
                         }).ToList()
                 }).ToList();

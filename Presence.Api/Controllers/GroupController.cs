@@ -1,4 +1,5 @@
-﻿using Domain.Service;
+﻿using Data.DAO;
+using Domain.Service;
 using Domain.UseCase;
 using Microsoft.AspNetCore.Mvc;
 using Presence.Api.Response;
@@ -6,7 +7,7 @@ using Presence.Api.Response;
 namespace Presence.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]/api")]
+    [Route("api[controller]")]
     public class GroupController : ControllerBase
     {
         private readonly IGroupUseCase _groupService;
@@ -14,11 +15,22 @@ namespace Presence.Api.Controllers
         {
             _groupService = groupService;
         }
-        [HttpGet]
+        [HttpGet("/groups")]
         public ActionResult<GroupResponse> GetAllGroups()
         {
-            _groupService.
-            return Ok(new GroupResponse());
+           var result = _groupService
+                .GetGroupsWithStudents()
+                .Select(group => new GroupResponse {
+                    Id = group.Id,
+                    Name = group.Name,
+                    Students = (IEnumerable<StudentResponse>)group.Students?.Select(
+                        user => new StudentResponse
+                        {
+                            Guid = user.Guid,
+                            Name = user.Name,
+                        }).ToList(),
+                }).ToList();
+            return Ok(result);
 
         }
     }
