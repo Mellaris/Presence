@@ -11,5 +11,6 @@ namespace Domain.UseCase
     public interface IStudentsUseCase
     {
         public void AddStudents(AddStudentsRequest addStudentsRequest);
+        public void RemoveStudents(RemoveStudentsRequest removeStudentsRequest);
     }
 }

@@ -9,7 +9,7 @@ namespace Domain.Request
 {
     public class AddStudentsRequest
     {
-        public string Name {  get; set; }
-        public Groups IdGroup { get; set; }
+        public string Name { get; set; }
+        public Groups GroupId { get; set; }
     }
 }

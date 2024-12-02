@@ -4,6 +4,7 @@ using Data.Repository;
 using Domain.Service;
 using Domain.UseCase;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 
 void printAllGroups(IGroupRepository groupRepository)
@@ -15,16 +16,24 @@ void printAllGroups(IGroupRepository groupRepository)
 }
 
 
+
 IServiceCollection serviceCollection = new ServiceCollection();
+//serviceCollection
+//    .AddDbContext<RemoteDatabaseContext>()
+//    .AddSingleton<IGroupRepository, SQLGroupRepository>()
+//    .AddSingleton<IGroupUseCase, GroupService>()
+//    .AddSingleton<GroupUi>();
+
 serviceCollection
     .AddDbContext<RemoteDatabaseContext>()
-    .AddSingleton<IGroupRepository, SQLGroupRepository>()
-    .AddSingleton<IGroupUseCase, GroupService>()
-    .AddSingleton<GroupUi>();
+    .AddSingleton<IStudentsRepository, SQLStudentsRepository>()
+    .AddSingleton<IStudentsUseCase, StudentsService>()
+    .AddSingleton<StudentsUi>();
+
 
 var servicProvider = serviceCollection.BuildServiceProvider();
-var groupUi = servicProvider.GetService<GroupUi>();
-
-groupUi?.UpdateGroup();
+//var groupUi = servicProvider.GetService<GroupUi>();
+var studentUi = servicProvider.GetService<StudentsUi>();
+studentUi?.RemoveStudent();
 
 

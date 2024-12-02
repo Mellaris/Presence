@@ -19,7 +19,12 @@ namespace Domain.Service
         }
         public void AddStudents(AddStudentsRequest addStudentsRequest)
         {
-            //_studentsRepository.AddStudents(new Students { Fio = addStudentsRequest.Name, IdGroup = Id});
+            _studentsRepository.AddStudents(new Students { Fio = addStudentsRequest.Name, IdGroup = addStudentsRequest.GroupId });
+        }
+
+        public void RemoveStudents(RemoveStudentsRequest removeStudentsRequest)
+        {
+            _studentsRepository.RemoveStudents(removeStudentsRequest.idS);
         }
     }
 }
