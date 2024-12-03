@@ -61,5 +61,17 @@ namespace Domain.Service
                         }).ToList()
                 }).ToList();
         }
+
+        public GroupEntity GetGroup(int Id)
+        {
+            Groups group = _groupRepository.GetGroup(Id);
+            return new GroupEntity
+            {
+                Id = group.Id,
+                Name = group.Name,
+                Students = (IEnumerable<StudentEntity>)group.Students
+                .Select(i => new StudentEntity { Guid = i.Id, Name = i.Fio })
+            };
+        }
     }
 }

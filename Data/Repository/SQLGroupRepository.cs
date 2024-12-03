@@ -59,6 +59,10 @@ namespace Data.Repository
         {
           return _dbContext.Groupses.Include(group => group.Students).ToList();
         }
+        public Groups GetGroup(int Id)
+        {
+            return _dbContext.Groupses.Include(group => group.Students).FirstOrDefault(i => i.Id == Id);
+        }
 
         public bool addGroupWithStudents(Groups groups, IEnumerable<Students> students)
         {
@@ -82,6 +86,7 @@ namespace Data.Repository
             }
             return false;
         }
+
 
         
     }

@@ -10,6 +10,7 @@ namespace Data.Repository
     public interface IGroupRepository
     {
         public IEnumerable<Groups> GetAllGroup();
+        public Groups GetGroup(int id);    
         public bool AddGroup(Groups groups);
         public bool RemoveGroup(Groups groups);
         public bool UpdateGroup(int Id, Groups groups); 

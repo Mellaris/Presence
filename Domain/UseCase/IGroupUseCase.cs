@@ -15,5 +15,6 @@ namespace Domain.UseCase
         public void RemoveGroupes(RemoveGroupRequest removeGroupRequest);
         public void UpdateGroupes(int Id, UpdateGroupRequest updateGroupRequest);
         public void AddGroupWithStudents(AddGroupWithStudentRequest addGroupWithStudent);
+        public GroupEntity GetGroup(int Id);
     }
 }
