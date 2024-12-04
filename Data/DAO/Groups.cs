@@ -13,5 +13,6 @@ namespace Data.DAO
         public int Id { get; set; }
         public string Name { get; set; }
         public virtual IEnumerable<Students> Students { get; set; }
+        public virtual IEnumerable<GroupsAndSubject> GroupSubjects { get; set; }
     }
 }

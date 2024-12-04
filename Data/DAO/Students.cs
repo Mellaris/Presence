@@ -13,5 +13,6 @@ namespace Data.DAO
         public int Id { get; set; }
         public string Fio { get; set; }
         public virtual Groups IdGroup { get; set; }
+        public virtual IEnumerable<Attendance> Presences { get; set; }
     }
 }

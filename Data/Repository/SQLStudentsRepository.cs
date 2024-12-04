@@ -1,4 +1,5 @@
 ﻿using Data.DAO;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,11 @@ namespace Data.Repository
         public IEnumerable<Students> getAllStudents()
         {
             return _dbContext.Studentses.ToList();
+        }
+
+        public Students getStudent(int id)
+        {
+            return _dbContext.Studentses.Include(u => u.Presences).FirstOrDefault(u => u.Id == id);
         }
 
         public bool RemoveStudents(int idS)

@@ -62,15 +62,19 @@ namespace Domain.Service
                 }).ToList();
         }
 
-        public GroupEntity GetGroup(int Id)
+        public GroupEntity GetGroup(int id)
         {
-            Groups group = _groupRepository.GetGroup(Id);
+            Groups group = _groupRepository.GetGroup(id);
             return new GroupEntity
             {
                 Id = group.Id,
                 Name = group.Name,
-                Students = (IEnumerable<StudentEntity>)group.Students
-                .Select(i => new StudentEntity { Guid = i.Id, Name = i.Fio })
+                Students = group.Students
+                .Select(u => new StudentEntity { Guid = u.Id, Name = u.Fio }),
+                groupSubjects = group.GroupSubjects
+                .Select(gs => new GroupSubjectEntity 
+                { Semester = Convert.ToInt32(gs.Semestr), Subject = new SubjectEntity
+                { Id = gs.idSub, Name = gs.SubjectId.Name } })
             };
         }
     }

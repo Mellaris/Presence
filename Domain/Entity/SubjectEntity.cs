@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data.DAO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace Domain.Entity
 {
-    public class GroupEntity
+    public class SubjectEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public IEnumerable<StudentEntity>? Students { get; set; } = null;
-        public IEnumerable<GroupSubjectEntity>? groupSubjects { get; set; } = null;
+        public virtual IEnumerable<GroupSubjectEntity> GroupsSubject { get; set; }
     }
 }

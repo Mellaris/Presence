@@ -57,11 +57,17 @@ namespace Data.Repository
 
         public IEnumerable<Groups> GetAllGroup()
         {
-          return _dbContext.Groupses.Include(group => group.Students).ToList();
+            return _dbContext.Groupses
+                  .Include(group => group.Students)
+                  .Include(group => group.GroupSubjects)
+                  .ToList();
         }
         public Groups GetGroup(int Id)
         {
-            return _dbContext.Groupses.Include(group => group.Students).FirstOrDefault(i => i.Id == Id);
+            return _dbContext.Groupses
+                .Include(group => group.Students)
+                .Include(group => group.GroupSubjects)
+                .FirstOrDefault(g => g.Id == Id);
         }
 
         public bool addGroupWithStudents(Groups groups, IEnumerable<Students> students)

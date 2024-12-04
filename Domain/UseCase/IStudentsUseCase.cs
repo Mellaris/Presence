@@ -1,4 +1,5 @@
 ﻿using Data.DAO;
+using Domain.Entity;
 using Domain.Request;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,7 @@ namespace Domain.UseCase
     {
         public void AddStudents(AddStudentsRequest addStudentsRequest);
         public void RemoveStudents(RemoveStudentsRequest removeStudentsRequest);
+        public IEnumerable<StudentEntity> GetAllUsers();
+        public StudentEntity GetUser(int guid);
     }
 }

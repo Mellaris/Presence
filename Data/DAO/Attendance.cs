@@ -15,5 +15,6 @@ namespace Data.DAO
         public DateOnly Date {  get; set; }
         public int LessonNumber { get; set; }
         public virtual Students IdStudent { get; set; }
+        public virtual Subjects SubjectId { get; set; }
     }
 }
