@@ -74,7 +74,7 @@ namespace Domain.Service
                 groupSubjects = group.GroupSubjects
                 .Select(gs => new GroupSubjectEntity 
                 { Semester = Convert.ToInt32(gs.Semestr), Subject = new SubjectEntity
-                { Id = gs.idSub, Name = gs.SubjectId.Name } })
+                { Id = Convert.ToInt32(gs.SubjectId), Name = gs.SubjectId.Name } })
             };
         }
     }

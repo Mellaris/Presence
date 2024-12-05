@@ -21,30 +21,30 @@ namespace Presence.Api.Controllers
             _userService = userService;
             _gsService = gsService;
         }
-        [HttpGet(template: "users")]
-        public ActionResult<StudentResponse> GetAllStudents()
-        {
-            var result = _userService.GetAllUsers()
-                .Select(user => new StudentResponse
-                {
-                    Guid = user.Guid,
-                    Name = user.Name,
-                    Group = new GroupResponse { Name = user.Group.Name }
-                }).ToList();
-            return Ok(result);
-        }
-        [HttpPost(template: "User/{name}")]
-        public ActionResult<StudentResponse> AddStudent(StudentRequest user)
-        {
-            _userService.AddStudents(new AddStudentsRequest { Name = user.Name });
-            return Ok();
-        }
-        [HttpDelete(template: "User/{guid}")]
-        public ActionResult<StudentResponse> RemoveUser(int guid)
-        {
-            _userService.RemoveStudents(new RemoveStudentsRequest { idS = guid });
-            return Ok();
-        }
+        //[HttpGet(template: "users")]
+        //public ActionResult<StudentResponse> GetAllStudents()
+        //{
+        //    var result = _userService.GetAllUsers()
+        //        .Select(user => new StudentResponse
+        //        {
+        //            Guid = user.Guid,
+        //            Name = user.Name,
+        //            Group = new GroupResponse { Name = user.Group.Name }
+        //        }).ToList();
+        //    return Ok(result);
+        //}
+        //[HttpPost(template: "{group_id}/students")]
+        //public ActionResult<StudentResponse> AddStudent(int group_id, List<string> student_guids)
+        //{
+        //    _userService.AddStudents(new AddStudentsRequest { GroupId = group_id,  });
+        //    return Ok();
+        //}
+        //[HttpDelete(template: "User/{guid}")]
+        //public ActionResult<StudentResponse> RemoveUser(int guid)
+        //{
+        //    _userService.RemoveStudents(new RemoveStudentsRequest { idS = guid });
+        //    return Ok();
+        //}
         //[HttpPost(template: "group/{group_id}/subjects")]
         //public ActionResult<SubjectResponse> AddSubject(Groups group_id, List<SubjectRequest> subjects)
         //{
