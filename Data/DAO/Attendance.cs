@@ -12,7 +12,7 @@ namespace Data.DAO
         [Key]
         public int Id { get; set; }
         public virtual Statuses IdStatus { get; set; }
-        public DateOnly Date {  get; set; }
+        public DateOnly Date { get; set; }
         public int LessonNumber { get; set; }
         public virtual Students IdStudent { get; set; }
         public virtual Subjects SubjectId { get; set; }

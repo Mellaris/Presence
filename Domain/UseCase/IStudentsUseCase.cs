@@ -15,5 +15,6 @@ namespace Domain.UseCase
         public void RemoveStudents(RemoveStudentsRequest removeStudentsRequest);
         public IEnumerable<StudentEntity> GetAllUsers();
         public StudentEntity GetUser(int guid);
+        public void AddChangeUsersGroup(AddChangeUsersGroupRequest users);
     }
 }

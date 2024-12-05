@@ -15,6 +15,14 @@ namespace Data.Repository
         {
             _dbContext = remoteDatabaseContext;
         }
+
+        public bool AddchangeUserGroup(int Id, int GroupId)
+        {
+            Students user = _dbContext.Studentses.FirstOrDefault(user => user.Id == Id);
+            user.IdGroup = _dbContext.Groupses.FirstOrDefault(group => group.Id == GroupId);
+            return _dbContext.SaveChanges() != 0;
+        }
+
         public bool AddStudents(Students students)
         {
             try
@@ -31,7 +39,10 @@ namespace Data.Repository
         }
         public IEnumerable<Students> getAllStudents()
         {
-            return _dbContext.Studentses.ToList();
+            return _dbContext.Studentses
+                .Include(u => u.Presences)
+                .Include(u => u.IdGroup)
+                .ToList();
         }
 
         public Students getStudent(int id)

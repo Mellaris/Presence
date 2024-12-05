@@ -18,6 +18,15 @@ namespace Domain.Service
         {
             _studentsRepository = studentsRepository;
         }
+
+        public void AddChangeUsersGroup(AddChangeUsersGroupRequest users)
+        {
+            foreach (var user in users.StudentsId)
+            {
+                _studentsRepository.AddchangeUserGroup(user, users.GroupId);
+            }
+        }
+
         public void AddStudents(AddStudentsRequest addStudentsRequest)
         {
             _studentsRepository.AddStudents(new Students { Fio = addStudentsRequest.Name, IdGroup = addStudentsRequest.GroupId });

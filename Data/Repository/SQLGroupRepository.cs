@@ -11,7 +11,8 @@ namespace Data.Repository
     public class SQLGroupRepository : IGroupRepository
     {
         private readonly RemoteDatabaseContext _dbContext;
-        public SQLGroupRepository(RemoteDatabaseContext remoteDatabaseContext) {
+        public SQLGroupRepository(RemoteDatabaseContext remoteDatabaseContext)
+        {
             _dbContext = remoteDatabaseContext;
         }
         public bool AddGroup(Groups groups)
@@ -77,7 +78,7 @@ namespace Data.Repository
             {
                 _dbContext.Groupses.Add(groups);
                 _dbContext.SaveChanges();
-                foreach(var item in students)
+                foreach (var item in students)
                 {
                     item.IdGroup = groups;
                     _dbContext.Studentses.Add(item);
@@ -86,7 +87,7 @@ namespace Data.Repository
                 transaction.Commit();
                 return true;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 transaction.Rollback();
             }
@@ -94,6 +95,6 @@ namespace Data.Repository
         }
 
 
-        
+
     }
 }

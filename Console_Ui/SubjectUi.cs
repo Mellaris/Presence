@@ -10,7 +10,7 @@ namespace Console_Ui
 {
     class SubjectUi
     {
-        private readonly ISubjectUseCase _subjectService;
+       public ISubjectUseCase _subjectService;
         public SubjectUi(ISubjectUseCase subjectService)
         {
             _subjectService = subjectService;

@@ -24,7 +24,7 @@ namespace Data.Repository
         public bool RemoveGroupSubject(GroupsAndSubject groupSubject)
         {
             GroupsAndSubject grSub = _dbContext.GroupsAndSubjects
-              .FirstOrDefault(GS => GS.GroupId == groupSubject.GroupId && GS.SubjectId == groupSubject.SubjectId);
+              .FirstOrDefault(g => g.GroupId == groupSubject.GroupId && g.SubjectId == groupSubject.SubjectId);
             _dbContext.GroupsAndSubjects.Remove(groupSubject);
             return _dbContext.SaveChanges() != 0;
         }

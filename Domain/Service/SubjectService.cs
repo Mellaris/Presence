@@ -28,7 +28,7 @@ namespace Domain.Service
                 });
         }
 
-        public IEnumerable<SubjectEntity> GetAllSubject()
+        IEnumerable<SubjectEntity> ISubjectUseCase.GetAllSubject()
         {
             throw new NotImplementedException();
         }

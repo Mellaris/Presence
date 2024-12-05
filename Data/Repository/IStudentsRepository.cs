@@ -13,5 +13,6 @@ namespace Data.Repository
         public Students getStudent(int id);
         public bool AddStudents(Students students);
         public bool RemoveStudents(int idS);
+        public bool AddchangeUserGroup(int Id, int GroupId);
     }
 }

@@ -18,24 +18,17 @@ namespace Presence.Api.Controllers
         {
             _groupService = groupService;
         }
-        [HttpGet("/groups")]
-        public ActionResult<GroupResponse> GetAllGroups()
+        [HttpGet(template: "groups")]
+        public ActionResult<GroupResponse> GetAllGroup()
         {
-            var result = _groupService
-                 .GetGroupsWithStudents()
-                 .Select(group => new GroupResponse
-                 {
-                     Id = group.Id,
-                     Name = group.Name,
-                     Students = (IEnumerable<StudentResponse>)group.Students?.Select(
-                         user => new StudentResponse
-                         {
-                             Guid = user.Guid,
-                             Name = user.Name,
-                         }).ToList(),
-                 }).ToList();
+            var result = _groupService.GetGroupsWithStudents().Select(group => new GroupResponse
+            {
+                Id = group.Id,
+                Name = group.Name,
+                Students = group.Students?.Select(user => new StudentResponse
+                { Name = user.Name, Guid = user.Guid }).ToList()
+            }).ToList();
             return Ok(result);
-
         }
         [HttpGet(template: "{Id}")]
         public ActionResult<GroupResponse> GetAllGroups(int Id)
@@ -84,7 +77,7 @@ namespace Presence.Api.Controllers
             }
             return Ok();
         }
-        [HttpDelete(template:"{Id}")]
+        [HttpDelete(template: "{Id}")]
         public ActionResult<GroupResponse> RemoveGroup(int Id)
         {
             _groupService.RemoveGroupes(new RemoveGroupRequest { Id = Id });

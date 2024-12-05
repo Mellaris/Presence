@@ -21,40 +21,35 @@ namespace Presence.Api.Controllers
             _userService = userService;
             _gsService = gsService;
         }
-        //[HttpGet(template: "users")]
-        //public ActionResult<StudentResponse> GetAllStudents()
-        //{
-        //    var result = _userService.GetAllUsers()
-        //        .Select(user => new StudentResponse
-        //        {
-        //            Guid = user.Guid,
-        //            Name = user.Name,
-        //            Group = new GroupResponse { Name = user.Group.Name }
-        //        }).ToList();
-        //    return Ok(result);
-        //}
-        //[HttpPost(template: "{group_id}/students")]
-        //public ActionResult<StudentResponse> AddStudent(int group_id, List<string> student_guids)
-        //{
-        //    _userService.AddStudents(new AddStudentsRequest { GroupId = group_id,  });
-        //    return Ok();
-        //}
-        //[HttpDelete(template: "User/{guid}")]
-        //public ActionResult<StudentResponse> RemoveUser(int guid)
-        //{
-        //    _userService.RemoveStudents(new RemoveStudentsRequest { idS = guid });
-        //    return Ok();
-        //}
-        //[HttpPost(template: "group/{group_id}/subjects")]
-        //public ActionResult<SubjectResponse> AddSubject(Groups group_id, List<SubjectRequest> subjects)
-        //{
-        //    _gsService.AddGroupSubject(new AddGroupSubjectsRequest
-        //    {
-        //        GroupId = group_id,
-        //        subjects = subjects
-        //        .Select(subject => new Semestrs { SubjectId = subject.Id, Semestr = subject.Semestr }).ToList()
-        //    });
-        //    return Ok();
-        //}
+        [HttpGet(template: "users")]
+        public ActionResult<StudentResponse> GetAllUsers()
+        {
+            var result = _userService.GetAllUsers()
+                .Select(user => new StudentResponse
+                {
+                    Guid = user.Guid,
+                    Name = user.Name,
+                    Group = new GroupResponse { Name = user.Group.Name }
+                }).ToList();
+            return Ok(result);
+        }
+        [HttpPost(template: "{group_id}/students")]
+        public ActionResult<StudentResponse> AddUser(int group_id, List<int> student_id)
+        {
+            _userService.AddChangeUsersGroup(new AddChangeUsersGroupRequest { GroupId = group_id, StudentsId = student_id.Select(guid => (guid)).ToList() });
+            return Ok();
+        }
+        [HttpPost(template: "group/{group_id}/subjects")]
+        public ActionResult<SubjectResponse> AddSubject(int group_id, List<SubjectRequest> subjects)
+        {
+            var group = new Groups { Id = group_id };
+            _gsService.AddGroupSubject(new AddGroupSubjectsRequest
+            {
+                GroupId = group,
+                subjects = subjects
+                .Select(subject => new Semestrs { SubjectId = subject.Id, Semestr = subject.Semestr }).ToList()
+            });
+            return Ok();
+        }
     }
 }

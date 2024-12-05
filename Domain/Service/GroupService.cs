@@ -72,9 +72,12 @@ namespace Domain.Service
                 Students = group.Students
                 .Select(u => new StudentEntity { Guid = u.Id, Name = u.Fio }),
                 groupSubjects = group.GroupSubjects
-                .Select(gs => new GroupSubjectEntity 
-                { Semester = Convert.ToInt32(gs.Semestr), Subject = new SubjectEntity
-                { Id = Convert.ToInt32(gs.SubjectId), Name = gs.SubjectId.Name } })
+                .Select(gs => new GroupSubjectEntity
+                {
+                    Semester = Convert.ToInt32(gs.Semestr),
+                    Subject = new SubjectEntity
+                    { Id = Convert.ToInt32(gs.SubjectId), Name = gs.SubjectId.Name }
+                })
             };
         }
     }
