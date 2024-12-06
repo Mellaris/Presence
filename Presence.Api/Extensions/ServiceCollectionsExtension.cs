@@ -16,6 +16,19 @@ namespace Presence.Api.Extensions
                 .AddScoped<IGroupRepository, SQLGroupRepository>()
                 .AddScoped<IGroupUseCase, GroupService>()
                 .AddScoped<GroupController>();
+            services
+                .AddScoped<ISubjectRepository, SQLSubjectRepository>()
+                .AddScoped<ISubjectUseCase, SubjectService>()
+                .AddScoped<AdminController>();
+            services
+                .AddScoped<IStudentsRepository, SQLStudentsRepository>()
+                .AddScoped<IStudentsUseCase, StudentsService>()
+                .AddScoped<AdminController>();
+            services
+                .AddScoped<IGroupSubjectRepository, SQLGroupSubjectRepository>()
+                .AddScoped<IGroupSubsUseCase, GroupSubsService>()
+                .AddScoped<AdminController>();
         }
+        
     }
 }

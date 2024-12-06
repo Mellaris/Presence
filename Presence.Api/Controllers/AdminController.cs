@@ -47,7 +47,7 @@ namespace Presence.Api.Controllers
             {
                 GroupId = group,
                 subjects = subjects
-                .Select(subject => new Semestrs { SubjectId = subject.Id, Semestr = subject.Semestr }).ToList()
+                .Select(subject => new Semestrs { SubjectId = new Subjects { Id = subject.Id }  , Semestr = subject.Semestr }).ToList()
             });
             return Ok();
         }

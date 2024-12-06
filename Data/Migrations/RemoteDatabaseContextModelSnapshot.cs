@@ -42,11 +42,16 @@ namespace Data.Migrations
                     b.Property<int>("LessonNumber")
                         .HasColumnType("integer");
 
+                    b.Property<int>("SubjectIdId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
                     b.HasIndex("IdStatusId");
 
                     b.HasIndex("IdStudentId");
+
+                    b.HasIndex("SubjectIdId");
 
                     b.ToTable("Attendances");
                 });
@@ -160,26 +165,34 @@ namespace Data.Migrations
                         .IsRequired();
 
                     b.HasOne("Data.DAO.Students", "IdStudent")
-                        .WithMany()
+                        .WithMany("Presences")
                         .HasForeignKey("IdStudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Data.DAO.Subjects", "SubjectId")
+                        .WithMany()
+                        .HasForeignKey("SubjectIdId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("IdStatus");
 
                     b.Navigation("IdStudent");
+
+                    b.Navigation("SubjectId");
                 });
 
             modelBuilder.Entity("Data.DAO.GroupsAndSubject", b =>
                 {
                     b.HasOne("Data.DAO.Groups", "GroupId")
-                        .WithMany()
+                        .WithMany("GroupSubjects")
                         .HasForeignKey("GroupIdId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Data.DAO.Subjects", "SubjectId")
-                        .WithMany()
+                        .WithMany("GroupsSubject")
                         .HasForeignKey("SubjectIdId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -192,12 +205,29 @@ namespace Data.Migrations
             modelBuilder.Entity("Data.DAO.Students", b =>
                 {
                     b.HasOne("Data.DAO.Groups", "IdGroup")
-                        .WithMany()
+                        .WithMany("Students")
                         .HasForeignKey("IdGroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("IdGroup");
+                });
+
+            modelBuilder.Entity("Data.DAO.Groups", b =>
+                {
+                    b.Navigation("GroupSubjects");
+
+                    b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("Data.DAO.Students", b =>
+                {
+                    b.Navigation("Presences");
+                });
+
+            modelBuilder.Entity("Data.DAO.Subjects", b =>
+                {
+                    b.Navigation("GroupsSubject");
                 });
 #pragma warning restore 612, 618
         }

@@ -17,6 +17,8 @@ namespace Data.Repository
 
         public bool AddGroupSubject(GroupsAndSubject groupSubject)
         {
+            groupSubject.SubjectId = _dbContext.Subjectses.FirstOrDefault(s => s.Id == groupSubject.SubjectId.Id);
+            groupSubject.GroupId = _dbContext.Groupses.FirstOrDefault(s => s.Id == groupSubject.GroupId.Id);
             _dbContext.GroupsAndSubjects.Add(groupSubject);
             return _dbContext.SaveChanges() != 0;
         }

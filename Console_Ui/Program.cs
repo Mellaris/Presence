@@ -18,17 +18,17 @@ void printAllGroups(IGroupRepository groupRepository)
 
 
 IServiceCollection serviceCollection = new ServiceCollection();
-//serviceCollection
-//    .AddDbContext<RemoteDatabaseContext>()
-//    .AddSingleton<IGroupRepository, SQLGroupRepository>()
-//    .AddSingleton<IGroupUseCase, GroupService>()
-//    .AddSingleton<GroupUi>();
-
 serviceCollection
     .AddDbContext<RemoteDatabaseContext>()
-    .AddSingleton<IStudentsRepository, SQLStudentsRepository>()
-    .AddSingleton<IStudentsUseCase, StudentsService>()
-    .AddSingleton<StudentsUi>();
+    .AddSingleton<IGroupRepository, SQLGroupRepository>()
+    .AddSingleton<IGroupUseCase, GroupService>()
+    .AddSingleton<GroupUi>();
+
+//serviceCollection
+//    .AddDbContext<RemoteDatabaseContext>()
+//    .AddSingleton<IStudentsRepository, SQLStudentsRepository>()
+//    .AddSingleton<IStudentsUseCase, StudentsService>()
+//    .AddSingleton<StudentsUi>();
 
 
 //serviceCollection
@@ -38,9 +38,9 @@ serviceCollection
 //    .AddSingleton<SubjectUi>();
 
 var servicProvider = serviceCollection.BuildServiceProvider();
-//var groupUi = servicProvider.GetService<GroupUi>();
-var studentUi = servicProvider.GetService<StudentsUi>();
+var groupUi = servicProvider.GetService<GroupUi>();
+//var studentUi = servicProvider.GetService<StudentsUi>();
 //var subjectsUi = servicProvider.GetService<SubjectUi>();
-studentUi?.AddStudent();
+groupUi?.AddGroupWithStudent();
 
 

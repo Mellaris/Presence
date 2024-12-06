@@ -107,7 +107,8 @@ namespace Data.Migrations
                     IdStatusId = table.Column<int>(type: "integer", nullable: false),
                     Date = table.Column<DateOnly>(type: "date", nullable: false),
                     LessonNumber = table.Column<int>(type: "integer", nullable: false),
-                    IdStudentId = table.Column<int>(type: "integer", nullable: false)
+                    IdStudentId = table.Column<int>(type: "integer", nullable: false),
+                    SubjectIdId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -124,6 +125,12 @@ namespace Data.Migrations
                         principalTable: "Studentses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Attendances_Subjectses_SubjectIdId",
+                        column: x => x.SubjectIdId,
+                        principalTable: "Subjectses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -135,6 +142,11 @@ namespace Data.Migrations
                 name: "IX_Attendances_IdStudentId",
                 table: "Attendances",
                 column: "IdStudentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Attendances_SubjectIdId",
+                table: "Attendances",
+                column: "SubjectIdId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_GroupsAndSubjects_GroupIdId",
