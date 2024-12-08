@@ -10,5 +10,9 @@ namespace Data.Repository
     public interface IAttendanceRepository
     {
         public bool AddAttendance(Attendance attendance);
+        public bool RemoveAttendanceGroup(int Id);
+        public bool RemoveAllAttendance();
+        public bool UpdateAttendance(int Id, Attendance attendance);
+        public IEnumerable<Attendance> GetAllAttendance();
     }
 }
