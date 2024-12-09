@@ -27,7 +27,8 @@ namespace Domain.Service
             {
                 IdStudent = students,
                 IdStatus = status,
-                SubjectId = sub
+                SubjectId = sub,
+                LessonNumber = presence.LessonNumber,
             });
         }
 
@@ -37,7 +38,7 @@ namespace Domain.Service
             {
                 Student = new StudentEntity
                 {
-                    Guid = Convert.ToInt32(presence.IdStudent),
+                    Guid = presence.IdStudent.Id,
                     Name = presence.IdStudent.Fio,
                     Group = new GroupEntity
                     {
@@ -82,12 +83,9 @@ namespace Domain.Service
 
         public void UpdateAttendance(int Id, UpdateAttendanceRequest presence)
         {
-            var students = new Students { Id = presence.StudentId };
-            var sub = new Subjects { Id = presence.SubjectId };
             _attendanceRepository.UpdateAttendance(Id, new Attendance
             {
-                SubjectId = sub,
-                IdStudent = students
+                Id = presence.AttendanceId
             });
         }
     }

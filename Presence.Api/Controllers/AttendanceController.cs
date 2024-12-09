@@ -66,8 +66,9 @@ namespace Presence.Api.Controllers
             _attendanceService.AddAttendance(new AddAttendanceRequest
             {
                 StatusId = presence.StatusId,
-                SubjectId = presence.Id,
+                SubjectId = presence.SubjectId,
                 StudentId = presence.StudentId,
+                LessonNumber = presence.LessonN
             });
             return Ok();
         }
@@ -84,9 +85,9 @@ namespace Presence.Api.Controllers
             return Ok();
         }
         [HttpPut(template: "presence/{status_id}")]
-        public ActionResult<AttendanceResponse> UpdatePresenceStatus(int status_id, UpdateAttendanceRequest presence)
+        public ActionResult<AttendanceResponse> UpdatePresenceStatus(int status_id, int id)
         {
-            _attendanceService.UpdateAttendance(status_id, new UpdateAttendanceRequest { SubjectId = presence.SubjectId, StudentId = presence.StudentId });
+            _attendanceService.UpdateAttendance(status_id, new UpdateAttendanceRequest { AttendanceId = id });
             return Ok();
         }
     }

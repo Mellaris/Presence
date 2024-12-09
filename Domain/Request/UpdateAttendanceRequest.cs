@@ -8,10 +8,6 @@ namespace Domain.Request
 {
     public class UpdateAttendanceRequest
     {
-        public int StudentId { get; set; }
-        public int SubjectId {  get; set; }
-        public DateOnly Date {  get; set; }
-        public int LessonN {  get; set; }
-
+        public int AttendanceId { get; set; }
     }
 }
