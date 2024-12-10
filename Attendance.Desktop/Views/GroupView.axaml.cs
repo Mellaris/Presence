@@ -15,25 +15,18 @@ namespace Attendance.Desktop.Views
 {
     public partial class GroupView : ReactiveUserControl<GroupViewModel>
     {
-        private readonly TopLevel _parentTopLevel;
-        public GroupView(TopLevel parentTopLevel)
+        public GroupView()
         {
-            _parentTopLevel = parentTopLevel;
             this.WhenActivated(action =>
             {
                 action(ViewModel!.SelectFileInteraction.RegisterHandler(ShowFileDialog));
             });
             AvaloniaXamlLoader.Load(this);
-           
         }
 
         private async Task ShowFileDialog(IInteractionContext<string?, string?> context)
         {
             var topLevel = TopLevel.GetTopLevel(this);
-            if(topLevel == null)
-            {
-                throw new InvalidOperationException("ошибка");
-            }
             var storageFile = await topLevel.StorageProvider.OpenFilePickerAsync(
                 new FilePickerOpenOptions()
                 {
@@ -41,14 +34,7 @@ namespace Attendance.Desktop.Views
                     Title = context.Input
                 }
             );
-            if( storageFile.Count > 0 )
-            {
-                context.SetOutput(storageFile.First().Path.ToString());
-            }
-            else
-            {
-                context.SetOutput(null);
-            }
+            context.SetOutput(storageFile.First().Path.ToString());
         }
     }
 }

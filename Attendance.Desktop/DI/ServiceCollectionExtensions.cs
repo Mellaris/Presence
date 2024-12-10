@@ -18,10 +18,11 @@ namespace Attendance.Desktop.DI
         public static void AddCommonService(this IServiceCollection collection)
         {
             collection
-                .AddDbContext<RemoteDatabaseContext>()
-                .AddSingleton<IGroupRepository, SQLGroupRepository>()
-                .AddTransient<IGroupUseCase, GroupService>()
-                .AddTransient<MainWindowViewModel>();
+             .AddDbContext<RemoteDatabaseContext>()
+             .AddSingleton<IGroupRepository, SQLGroupRepository>()
+             .AddTransient<IGroupUseCase, GroupService>()
+             .AddTransient<MainWindowViewModel, MainWindowViewModel>()
+             .AddTransient<GroupViewModel>();
         }
     }
 }
