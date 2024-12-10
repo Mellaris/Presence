@@ -1,16 +1,18 @@
-﻿using Domain.UseCase;
+﻿using Attendance.Desktop.ViewModels;
+using Domain.UseCase;
+using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
 using System;
 
-namespace Attendance.Desktop.ViewModels
+namespace Attendance.Desktop.ViewModels;
+
+public class MainWindowViewModel : ViewModelBase, IScreen
 {
-    public class MainWindowViewModel : ViewModelBase
+    public RoutingState Router { get; } = new RoutingState();
+
+    public MainWindowViewModel(IServiceProvider serviceProvider)
     {
-        private readonly IGroupUseCase _groupService;
-        public MainWindowViewModel(IGroupUseCase groupUseCase)
-        {
-            _groupService = groupUseCase;
-        }
-        
+        var groupViewModel = serviceProvider.GetRequiredService<GroupViewModel>();
+        Router.Navigate.Execute(groupViewModel);
     }
 }

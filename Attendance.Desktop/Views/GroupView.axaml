@@ -1,12 +1,11 @@
-<Window xmlns="https://github.com/avaloniaui"
+<UserControl xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:Attendance.Desktop.ViewModels"
-		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Attendance.Desktop.Views.GroupView"
-		x:CompileBindings ="False"
-		x:DataType="vm:GroupViewModel">
+        x:DataType="vm:GroupViewModel">
 
 	<Design.DataContext>
 		<vm:GroupViewModel/>
@@ -32,7 +31,7 @@
 			<ComboBox/>
 		</StackPanel>
 		<Border>
-			<ListBox Background="Bisque" ItemsSource="{Binding Users}">
+			<ListBox Background="Bisque" ItemsSource="{Binding Students}">
 				<ListBox.ItemTemplate>
 					<DataTemplate>
 						<StackPanel Orientation="Horizontal">
@@ -43,4 +42,5 @@
 			</ListBox>
 		</Border>
 	</DockPanel>
-</Window>
+</UserControl>
+
