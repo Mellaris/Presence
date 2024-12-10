@@ -1,12 +1,17 @@
+using Attendance.Desktop.ViewModels;
 using Avalonia.Controls;
+using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
+using ReactiveUI;
 
-namespace Attendance.Desktop.Views
+namespace Attendance.Desktop.Views;
+
+public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
 {
-    public partial class MainWindow : Window
+    public MainWindow()
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        this.WhenActivated(disposables => { });
+        AvaloniaXamlLoader.Load(this);
+
     }
 }

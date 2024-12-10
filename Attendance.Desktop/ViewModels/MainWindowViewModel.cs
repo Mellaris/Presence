@@ -1,4 +1,6 @@
 ﻿using Domain.UseCase;
+using ReactiveUI;
+using System;
 
 namespace Attendance.Desktop.ViewModels
 {
@@ -9,6 +11,6 @@ namespace Attendance.Desktop.ViewModels
         {
             _groupService = groupUseCase;
         }
-        public string Greeting { get; } = "Welcome to Avalonia!";
+        
     }
 }
