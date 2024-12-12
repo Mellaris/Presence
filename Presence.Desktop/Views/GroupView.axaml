@@ -7,11 +7,9 @@
              x:Class="Presence.Desktop.Views.GroupView"
 			 x:DataType="vm:GroupViewModel">
 
-
 	<Design.DataContext>
 		<vm:GroupViewModel/>
 	</Design.DataContext>
-
 	<DockPanel>
 		<Grid DockPanel.Dock="Top" RowDefinitions="*,*,*" ColumnDefinitions="*,*,*">
 			<TextBlock FontSize="20" Grid.Column="1" Grid.Row="0">Группы и студенты</TextBlock>

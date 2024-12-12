@@ -16,47 +16,28 @@ namespace Presence.Desktop.ViewModels
     public class GroupViewModel : ViewModelBase, IRoutableViewModel
     {
         public string? UrlPathSegment => throw new NotImplementedException();
-
         public IScreen HostScreen => throw new NotImplementedException();
-
         private readonly IGroupUseCase _groupService;
         private readonly IStudentsUseCase _studentsService;
         private List<GroupPresenter> _groupPresentersDataSource = new List<GroupPresenter>();
-
-
         private ObservableCollection<GroupPresenter> _groups;
         public ObservableCollection<GroupPresenter> Groups => _groups;
-
-
-
         private GroupPresenter? _selectedGroupItem;
         public GroupPresenter? SelectedGroupItem
         {
             get => _selectedGroupItem;
             set => this.RaiseAndSetIfChanged(ref _selectedGroupItem, value);
         }
-
-
-
         private ObservableCollection<StudentPresenter> _students;
         public ObservableCollection<StudentPresenter> Students { get => _students; }
-
-
-
-
         private int _sort;
         public int Sort { get => _sort; set => this.RaiseAndSetIfChanged(ref _sort, value); }
-
-
         private bool _MultipleSelected = false;
         public bool MultipleSelected { get => _MultipleSelected; set => this.RaiseAndSetIfChanged(ref _MultipleSelected, value); }
         public SelectionModel<StudentPresenter> Selection { get; }
-
         private StudentPresenter? _selectedStudent;
-
         public ICommand RemoveSelectedCommand { get; }
         public ICommand Import { get; }
-
         public GroupViewModel(IGroupUseCase groupUseCase, IStudentsUseCase studentsService)
         {
             _groupService = groupUseCase;
@@ -106,21 +87,7 @@ namespace Presence.Desktop.ViewModels
         {
 
         }
-        private void SetUsers()
-        {
-            if (SelectedGroupItem == null) return;
-            if (SelectedGroupItem.users == null) return;
-            Students.Clear();
-            List<StudentPresenter> users = _groupPresentersDataSource.FirstOrDefault(p => p.Id == SelectedGroupItem.Id).users.ToList();
-            if (Sort == 1)
-                users = users.OrderBy(user => user.Name).ToList();
-            else if (Sort == 2)
-                users = users.OrderByDescending(user => user.Name).ToList();
-            foreach (var user in users)
-            {
-                Students.Add(user);
-            }
-        }
+        
 
         void SelectionChanged(object sender, SelectionModelSelectionChangedEventArgs e)
         {
@@ -158,7 +125,6 @@ namespace Presence.Desktop.ViewModels
             }
             RefreshGroups();
         }
-
         private void RefreshGroups()
         {
             _groupPresentersDataSource.Clear();
@@ -179,6 +145,21 @@ namespace Presence.Desktop.ViewModels
                 _groupPresentersDataSource.Add(groupPresenter);
             }
             _groups = new ObservableCollection<GroupPresenter>(_groupPresentersDataSource);
+        }
+        private void SetUsers()
+        {
+            if (SelectedGroupItem == null) return;
+            if (SelectedGroupItem.users == null) return;
+            Students.Clear();
+            List<StudentPresenter> users = _groupPresentersDataSource.FirstOrDefault(p => p.Id == SelectedGroupItem.Id).users.ToList();
+            if (Sort == 1)
+                users = users.OrderBy(user => user.Name).ToList();
+            else if (Sort == 2)
+                users = users.OrderByDescending(user => user.Name).ToList();
+            foreach (var user in users)
+            {
+                Students.Add(user);
+            }
         }
     }
 }
