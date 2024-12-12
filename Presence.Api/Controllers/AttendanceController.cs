@@ -73,17 +73,25 @@ namespace Presence.Api.Controllers
             return Ok();
         }
         [HttpDelete(template: "allPresence")]
-        public ActionResult<AttendanceResponse> RemoveAllPresence()
+        public ActionResult<AttendanceResponse> RemoveAllPresence(int group_id)
         {
-            _attendanceService.RemoveAllAttendance();
+            if(group_id > 0)
+            {
+                _attendanceService.RemoveAttendanceByGroup(group_id);
+            }
+            else
+            {
+                _attendanceService.RemoveAllAttendance();
+            }
+            
             return Ok();
         }
-        [HttpDelete(template: "{group_id}")]
-        public ActionResult<AttendanceResponse> RemovePresenceByGroupId(int group_id)
-        {
-            _attendanceService.RemoveAttendanceByGroup(group_id);
-            return Ok();
-        }
+        //[HttpDelete(template: "{group_id}")]
+        //public ActionResult<AttendanceResponse> RemovePresenceByGroupId(int group_id)
+        //{
+        //    _attendanceService.RemoveAttendanceByGroup(group_id);
+        //    return Ok();
+        //}
         [HttpPut(template: "presence/{status_id}")]
         public ActionResult<AttendanceResponse> UpdatePresenceStatus(int status_id, int id)
         {
